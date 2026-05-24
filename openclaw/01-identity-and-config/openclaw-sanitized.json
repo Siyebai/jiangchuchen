@@ -1,0 +1,114 @@
+{
+    "meta":  {
+                 "lastTouchedVersion":  "2026.5.7",
+                 "lastTouchedAt":  "2026-05-18T11:58:32.119Z"
+             },
+    "wizard":  {
+                   "lastRunAt":  "2026-05-17T12:30:00.000Z",
+                   "lastRunVersion":  "2026.5.7",
+                   "lastRunCommand":  "doctor",
+                   "lastRunMode":  "local"
+               },
+    "agents":  {
+                   "defaults":  {
+                                    "agentRuntime":  {
+                                                         "id":  "pi"
+                                                     },
+                                    "params":  {
+                                                   "model":  "deepseek/deepseek-v4-flash"
+                                               },
+                                    "model":  {
+                                                  "primary":  "deepseek/deepseek-v4-flash",
+                                                  "fallbacks":  [
+                                                                    "deepseek/deepseek-v4-pro"
+                                                                ]
+                                              }
+                                }
+               },
+    "commands":  {
+                     "native":  "auto",
+                     "nativeSkills":  "auto",
+                     "restart":  true,
+                     "ownerDisplay":  "raw"
+                 },
+    "channels":  {
+                     "feishu":  {
+                                    "enabled":  false
+                                }
+                 },
+    "gateway":  {
+                    "port":  18789,
+                    "mode":  "local",
+                    "auth":  {
+                                 "mode":  "token"
+                                 // TOKEN: set via environment variable or .env file
+                             },
+                    "bind":  "loopback"
+                },
+    "plugins":  {
+                    "entries":  {
+                                    "deepseek":  {
+                                                     "enabled":  true
+                                                 },
+                                    "ollama":  {
+                                                   "enabled":  true
+                                                   // ⚠️ NOTE: Ollama executable no longer exists on system!
+                                                   // Either reinstall Ollama or disable this provider
+                                               }
+                                }
+                },
+    "models":  {
+                   "mode":  "merge",
+                   "providers":  {
+                                     "deepseek":  {
+                                                      "baseUrl":  "https://api.deepseek.com/v1",
+                                                      "apiKey":  "$DEEPSEEK_API_KEY",
+                                                      "models":  [
+                                                                     {
+                                                                         "maxTokens":  16384,
+                                                                         "name":  "DeepSeek V4 Flash",
+                                                                         "id":  "deepseek-v4-flash",
+                                                                         "contextWindow":  1000000
+                                                                     },
+                                                                     {
+                                                                         "maxTokens":  16384,
+                                                                         "name":  "DeepSeek V4 Pro",
+                                                                         "id":  "deepseek-v4-pro",
+                                                                         "contextWindow":  1000000
+                                                                     },
+                                                                     {
+                                                                         "maxTokens":  8192,
+                                                                         "name":  "DeepSeek Chat (deprecated)",
+                                                                         "id":  "deepseek-chat",
+                                                                         "contextWindow":  128000
+                                                                     },
+                                                                     {
+                                                                         "maxTokens":  8192,
+                                                                         "name":  "DeepSeek Reasoner (deprecated)",
+                                                                         "id":  "deepseek-reasoner",
+                                                                         "contextWindow":  128000
+                                                                     }
+                                                                 ]
+                                                  },
+                                     "ollama":  {
+                                                    "baseUrl":  "http://localhost:11434/v1",
+                                                    "models":  [
+                                                                   {
+                                                                       "id":  "qwen2.5:7b",
+                                                                       "name":  "Qwen2.5 7B (Local)",
+                                                                       "contextWindow":  32768,
+                                                                       "maxTokens":  4096,
+                                                                       "input":  ["text"]
+                                                                   },
+                                                                   {
+                                                                       "id": "moondream:latest",
+                                                                       "name":  "Moondream (Local Vision)",
+                                                                       "contextWindow":  4096,
+                                                                       "maxTokens":  2048,
+                                                                       "input":  ["text", "image"]
+                                                                   }
+                                                               ]
+                                                }
+                                 }
+               }
+}

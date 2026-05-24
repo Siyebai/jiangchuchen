@@ -1,0 +1,19 @@
+# Secrets - never commit
+*.key
+*.pem
+.env
+**/apiKey*
+
+# Sensitive config
+!openclaw-sanitized.json
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Temp
+*.log
+*.bak
+node_modules/
+.temp/
+temp/
